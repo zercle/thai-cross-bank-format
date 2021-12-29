@@ -2,7 +2,13 @@ package scb
 
 // SCB: Bill Payment Host-to-Host
 // interface specification (v1.4)
-import thaicrossbankformat "github.com/zercle/thai-cross-bank-format"
+import (
+	"fmt"
+	"log"
+	"time"
+
+	thaicrossbankformat "github.com/zercle/thai-cross-bank-format"
+)
 
 type BillPaymentReq struct {
 	Request    string  `json:"request"`
@@ -21,6 +27,30 @@ type BillPaymentReq struct {
 }
 
 func (b BillPaymentReq) ToCrossBank(result thaicrossbankformat.CrossBankBillPaymentDetail) {
+	result = thaicrossbankformat.CrossBankBillPaymentDetail{
+		RecordType:        "D",   // Detail
+		BankCode:          "014", // SCB
+		CompanyAccount:    b.Account,
+		Ref1:              b.Reference1,
+		Ref2:              b.Reference2,
+		Ref3:              b.Reference3,
+		BranchNo:          b.BranchCode,
+		TellerNo:          b.TerminalId,
+		KindOfTransaction: "D", // Debit
+		Amount:            b.Amount,
+		BankRef:           b.TranId,
+	}
+
+	// convert SCB time format into RFC3339
+	transactionTime, err := time.Parse(fmt.Sprintf("%s+07:00", b.TranDate), time.RFC3339)
+
+	if err != nil {
+		log.Printf("%+v", err)
+	}
+
+	result.PaymentDate = transactionTime
+	result.PaymentTime = transactionTime
+
 	return
 }
 
