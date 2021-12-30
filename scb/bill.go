@@ -55,10 +55,11 @@ func (b BillPaymentReq) ToCrossBank(result thaicrossbankformat.CrossBankBillPaym
 }
 
 type BillPaymentResp struct {
-	Response string `json:"response"`
-	ResCode  string `json:"resCode"`
-	ResMesg  string `json:"resMesg"`
-	TranId   string `json:"tranID"`
-	// Reference2 string `json:"reference2"`
-	// PaymentId  string `json:"paymentID"`
+	Response   string  `json:"response"`
+	ResCode    string  `json:"resCode"`
+	ResMesg    string  `json:"resMesg"`
+	TranId     string  `json:"tranID"`
+	Reference2 string  `json:"reference2,omitempty"`
+	PaymentId  string  `json:"paymentID,omitempty"`
+	Amount     float64 `json:"amount,omitempty"`
 }
