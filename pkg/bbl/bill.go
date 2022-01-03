@@ -2,7 +2,7 @@ package bbl
 
 // BBL: Bill Payment 2Ways
 // Payment Notification Service(v5.0)
-import thaicrossbankformat "github.com/zercle/thai-cross-bank-format"
+import bot "github.com/zercle/thai-cross-bank-proxy/pkg/bankofthailand"
 
 type BillPaymentReq struct {
 	PayeeId    string `json:"payeeId"`
@@ -18,7 +18,7 @@ type BillPaymentReq struct {
 	FromBank   string `json:"fromBank"`
 }
 
-func (b BillPaymentReq) ToCrossBank(result thaicrossbankformat.CrossBankBillPaymentDetail) {
+func (b BillPaymentReq) ToCrossBank(result bot.CrossBankBillPaymentDetail) {
 	return
 }
 

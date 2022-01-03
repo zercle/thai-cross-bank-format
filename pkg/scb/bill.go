@@ -7,7 +7,7 @@ import (
 	"log"
 	"time"
 
-	thaicrossbankformat "github.com/zercle/thai-cross-bank-format"
+	bot "github.com/zercle/thai-cross-bank-proxy/pkg/bankofthailand"
 )
 
 type BillPaymentReq struct {
@@ -26,8 +26,8 @@ type BillPaymentReq struct {
 	TerminalId string  `json:"terminalID"`
 }
 
-func (b BillPaymentReq) ToCrossBank(result thaicrossbankformat.CrossBankBillPaymentDetail) {
-	result = thaicrossbankformat.CrossBankBillPaymentDetail{
+func (b BillPaymentReq) ToCrossBank(result bot.CrossBankBillPaymentDetail) {
+	result = bot.CrossBankBillPaymentDetail{
 		RecordType:        "D",   // Detail
 		BankCode:          "014", // SCB
 		CompanyAccount:    b.Account,

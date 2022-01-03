@@ -7,7 +7,8 @@ import (
 	"log"
 	"time"
 
-	thaicrossbankformat "github.com/zercle/thai-cross-bank-format"
+	bot "github.com/zercle/thai-cross-bank-proxy/pkg/bankofthailand"
+	utils "github.com/zercle/thai-cross-bank-proxy/utils"
 )
 
 type Tag30Req struct {
@@ -40,8 +41,8 @@ type Tag30Req struct {
 	TepaCode               string      `json:"tepaCode"`
 }
 
-func (b Tag30Req) ToCrossBank(result thaicrossbankformat.CrossBankBillPaymentDetail, err error) {
-	result = thaicrossbankformat.CrossBankBillPaymentDetail{
+func (b Tag30Req) ToCrossBank(result bot.CrossBankBillPaymentDetail, err error) {
+	result = bot.CrossBankBillPaymentDetail{
 		RecordType:        "D", // Detail
 		BankCode:          b.SendingBankCode,
 		CompanyAccount:    b.PayeeAccountNumber,
@@ -62,7 +63,7 @@ func (b Tag30Req) ToCrossBank(result thaicrossbankformat.CrossBankBillPaymentDet
 	}
 
 	// convert SCB time format into RFC3339
-	transactionTime, err := time.Parse(b.TransactionDateAndTime, thaicrossbankformat.RFC3339Mili)
+	transactionTime, err := time.Parse(b.TransactionDateAndTime, utils.RFC3339Mili)
 
 	if err != nil {
 		log.Printf("%+v", err)

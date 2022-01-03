@@ -5,7 +5,7 @@ package ktb
 import (
 	"encoding/xml"
 
-	thaicrossbankformat "github.com/zercle/thai-cross-bank-format"
+	bot "github.com/zercle/thai-cross-bank-proxy/pkg/bankofthailand"
 )
 
 type BillPaymentReq struct {
@@ -39,7 +39,7 @@ type BillPaymentReqCode struct {
 	Ref4     string   `xml:"ref4"`
 }
 
-func (b BillPaymentReq) ToCrossBank(result thaicrossbankformat.CrossBankBillPaymentDetail) {
+func (b BillPaymentReq) ToCrossBank(result bot.CrossBankBillPaymentDetail) {
 	return
 }
 
