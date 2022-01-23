@@ -1,11 +1,11 @@
 package bbl
 
-import bot "github.com/zercle/thai-cross-bank-proxy/pkg/bankofthailand"
+import "github.com/zercle/thai-cross-bank-proxy/pkg/datamodels"
 
 type Tag30Req struct {
 }
 
-func (b Tag30Req) ToCrossBank(result bot.CrossBankBillPaymentDetail) {
+func (b Tag30Req) ToTransaction(result datamodels.Transaction, err error) {
 	return
 }
 

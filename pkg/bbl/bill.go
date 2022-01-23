@@ -1,24 +1,61 @@
 package bbl
 
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"time"
+
+	"github.com/zercle/thai-cross-bank-proxy/pkg/datamodels"
+)
+
 // BBL: Bill Payment 2Ways
 // Payment Notification Service(v5.0)
-import bot "github.com/zercle/thai-cross-bank-proxy/pkg/bankofthailand"
 
 type BillPaymentReq struct {
-	PayeeId    string `json:"payeeId"`
-	TransDate  string `json:"transDate"`
-	TransTime  string `json:"transTime"`
-	TransRef   string `json:"transRef"`
-	Channel    string `json:"channel"`
-	TermId     string `json:"termId"`
-	Amount     string `json:"amount"`
-	Reference1 string `json:"reference1"`
-	Reference2 string `json:"reference2"`
-	Reference3 string `json:"reference3"`
-	FromBank   string `json:"fromBank"`
+	PayeeId    string      `json:"payeeId"`
+	TransDate  string      `json:"transDate"`
+	TransTime  string      `json:"transTime"`
+	TransRef   string      `json:"transRef"`
+	Channel    string      `json:"channel"`
+	TermId     string      `json:"termId"`
+	Amount     json.Number `json:"amount"`
+	Reference1 string      `json:"reference1"`
+	Reference2 string      `json:"reference2"`
+	Reference3 string      `json:"reference3"`
+	FromBank   string      `json:"fromBank"`
 }
 
-func (b BillPaymentReq) ToCrossBank(result bot.CrossBankBillPaymentDetail) {
+func (b BillPaymentReq) ToTransaction(result datamodels.Transaction, err error) {
+	// convert BBL time format into RFC3339
+	transactionTime, err := time.Parse(fmt.Sprintf("%sT%s+07:00", b.TransDate, b.TransTime), time.RFC3339)
+
+	if err != nil {
+		log.Printf("%+v", err)
+		return
+	}
+
+	// check amount
+	_, err = b.Amount.Float64()
+	if err != nil {
+		log.Printf("%+v", err)
+		return
+	}
+
+	result = datamodels.Transaction{
+		PayeeBankCode: "002", // BBL
+		PayeePID:      b.PayeeId,
+		PayerBankCode: b.FromBank,
+		Reference1:    b.Reference1,
+		Reference2:    b.Reference2,
+		Reference3:    b.Reference3,
+		Channel:       b.Channel,
+		Terminal:      b.TermId,
+		Amount:        b.Amount,
+		TxRef:         b.TransRef,
+		TxDateTime:    transactionTime,
+	}
+
 	return
 }
 

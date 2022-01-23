@@ -3,53 +3,58 @@ package scb
 // SCB: Bill Payment Host-to-Host
 // interface specification (v1.4)
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"time"
 
-	bot "github.com/zercle/thai-cross-bank-proxy/pkg/bankofthailand"
+	"github.com/zercle/thai-cross-bank-proxy/pkg/datamodels"
 )
 
 type BillPaymentReq struct {
-	Request    string  `json:"request"`
-	User       string  `json:"user"`
-	Password   string  `json:"password"`
-	TranId     string  `json:"tranID"`
-	TranDate   string  `json:"tranDate"`
-	Channel    string  `json:"channel"`
-	Account    string  `json:"account"`
-	Amount     float64 `json:"amount"`
-	Reference1 string  `json:"reference1"`
-	Reference2 string  `json:"reference2"`
-	Reference3 string  `json:"reference3"`
-	BranchCode string  `json:"branchCode"`
-	TerminalId string  `json:"terminalID"`
+	Request    string      `json:"request"`
+	User       string      `json:"user"`
+	Password   string      `json:"password"`
+	TranId     string      `json:"tranID"`
+	TranDate   string      `json:"tranDate"`
+	Channel    string      `json:"channel"`
+	Account    string      `json:"account"`
+	Amount     json.Number `json:"amount"`
+	Reference1 string      `json:"reference1"`
+	Reference2 string      `json:"reference2"`
+	Reference3 string      `json:"reference3"`
+	BranchCode string      `json:"branchCode"`
+	TerminalId string      `json:"terminalID"`
 }
 
-func (b BillPaymentReq) ToCrossBank(result bot.CrossBankBillPaymentDetail) {
-	result = bot.CrossBankBillPaymentDetail{
-		RecordType:        "D",   // Detail
-		BankCode:          "014", // SCB
-		CompanyAccount:    b.Account,
-		Ref1:              b.Reference1,
-		Ref2:              b.Reference2,
-		Ref3:              b.Reference3,
-		BranchNo:          b.BranchCode,
-		TellerNo:          b.TerminalId,
-		KindOfTransaction: "D", // Debit
-		Amount:            b.Amount,
-		BankRef:           b.TranId,
-	}
-
+func (b BillPaymentReq) ToTransaction(result datamodels.Transaction, err error) {
 	// convert SCB time format into RFC3339
 	transactionTime, err := time.Parse(fmt.Sprintf("%s+07:00", b.TranDate), time.RFC3339)
 
 	if err != nil {
 		log.Printf("%+v", err)
+		return
 	}
 
-	result.PaymentDate = transactionTime
-	result.PaymentTime = transactionTime
+	// check amount
+	_, err = b.Amount.Float64()
+	if err != nil {
+		log.Printf("%+v", err)
+		return
+	}
+
+	result = datamodels.Transaction{
+		PayeeBankCode: "014", // SCB
+		PayeeAcc:      b.Account,
+		Reference1:    b.Reference1,
+		Reference2:    b.Reference2,
+		Reference3:    b.Reference3,
+		PayeeBranchNo: b.BranchCode,
+		Terminal:      b.TerminalId,
+		Amount:        b.Amount,
+		TxRef:         b.TranId,
+		TxDateTime:    transactionTime,
+	}
 
 	return
 }

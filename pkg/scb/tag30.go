@@ -7,7 +7,7 @@ import (
 	"log"
 	"time"
 
-	bot "github.com/zercle/thai-cross-bank-proxy/pkg/bankofthailand"
+	"github.com/zercle/thai-cross-bank-proxy/pkg/datamodels"
 	utils "github.com/zercle/thai-cross-bank-proxy/utils"
 )
 
@@ -41,27 +41,7 @@ type Tag30Req struct {
 	TepaCode               string      `json:"tepaCode"`
 }
 
-func (b Tag30Req) ToCrossBank(result bot.CrossBankBillPaymentDetail, err error) {
-	result = bot.CrossBankBillPaymentDetail{
-		RecordType:        "D", // Detail
-		BankCode:          b.SendingBankCode,
-		CompanyAccount:    b.PayeeAccountNumber,
-		CustomerName:      b.PayerName,
-		Ref1:              b.BillPaymentRef1,
-		Ref2:              b.BillPaymentRef2,
-		Ref3:              b.BillPaymentRef3,
-		KindOfTransaction: "D", // Debit
-		BillerId:          b.PayeeProxyId,
-		SendingBankCode:   b.SendingBankCode,
-		BankRef:           b.TransactionId,
-	}
-
-	result.Amount, err = b.Amount.Float64()
-
-	if err != nil {
-		log.Printf("%+v", err)
-	}
-
+func (b Tag30Req) ToTransaction(result datamodels.Transaction, err error) {
 	// convert SCB time format into RFC3339
 	transactionTime, err := time.Parse(b.TransactionDateAndTime, utils.RFC3339Mili)
 
@@ -69,8 +49,32 @@ func (b Tag30Req) ToCrossBank(result bot.CrossBankBillPaymentDetail, err error) 
 		log.Printf("%+v", err)
 	}
 
-	result.PaymentDate = transactionTime
-	result.PaymentTime = transactionTime
+	// check amount
+	_, err = b.Amount.Float64()
+	if err != nil {
+		log.Printf("%+v", err)
+		return
+	}
+
+	result = datamodels.Transaction{
+		PayeeBankCode: "014", // SCB
+		PayeeAcc:      b.PayeeAccountNumber,
+		PayeeName:     b.PayeeName,
+		PayeePID:      b.PayeeProxyId,
+		PayerBankCode: b.SendingBankCode,
+		PayerAcc:      b.PayerAccountNumber,
+		PayerName:     b.PayerName,
+		PayerPID:      b.PayerProxyId,
+		Reference1:    b.BillPaymentRef1,
+		Reference2:    b.BillPaymentRef2,
+		Reference3:    b.BillPaymentRef3,
+		Amount:        b.Amount,
+		CurrencyCode:  b.CurrencyCode,
+		Channel:       b.ChannelCode,
+		TxRef:         b.TransactionId,
+		TxDateTime:    transactionTime,
+	}
+
 	return
 }
 

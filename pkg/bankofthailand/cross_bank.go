@@ -44,8 +44,6 @@ type CrossBankBillPaymentDetail struct {
 	// Spare          string
 	SendingBankCode string `json:"sendingBankCode"`
 	NewChequeNo     string `json:"newChequeNo"`
-	// add extra for bank transaction fererence / bank transaction id
-	BankRef string `json:"bankRef"`
 }
 
 type CrossBankBillPaymentTotal struct {

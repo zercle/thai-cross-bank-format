@@ -5,7 +5,7 @@ package ktb
 import (
 	"encoding/xml"
 
-	bot "github.com/zercle/thai-cross-bank-proxy/pkg/bankofthailand"
+	"github.com/zercle/thai-cross-bank-proxy/pkg/datamodels"
 )
 
 type BillPaymentReq struct {
@@ -39,7 +39,7 @@ type BillPaymentReqCode struct {
 	Ref4     string   `xml:"ref4"`
 }
 
-func (b BillPaymentReq) ToCrossBank(result bot.CrossBankBillPaymentDetail) {
+func (b BillPaymentReqCode) ToTransaction(result datamodels.Transaction, err error) {
 	return
 }
 
