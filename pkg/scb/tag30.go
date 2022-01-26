@@ -11,6 +11,36 @@ import (
 	utils "github.com/zercle/thai-cross-bank-proxy/utils"
 )
 
+// Tag30ProxyType channel that customer pay
+var Tag30ProxyType = map[string]string{
+	"MSISDN":    "Mobile number",
+	"NATID":     "Citizen ID, Tax ID, Government Customer ID",
+	"BILLERID":  "Biller ID for Promptpay Bill Pay method",
+	"EWALLETID": "E-Wallet ID",
+}
+
+// Tag30RespCode response code use in SCB's API
+var Tag30RespCode = map[string]string{
+	"1000": "Success",
+	"1101": "Missing required parameters",
+	"1102": "Invalid parameters entered",
+	"1103": "Empty string input not supported",
+	"1104": "Requested entity record does not exist",
+	"1105": "Unrecognized field name was entered - Please check spelling and/or refer to the API docs for correct name",
+	"1111": "Data entry duplicated with existing",
+	"4101": "Current channel is not supported",
+	"8101": "Invalid response from downstream service",
+	"8102": "Payment API error code",
+	"8901": "Database error",
+	"8902": "Error getting mysql_pool connection",
+	"9100": "Missing required authorization credentials",
+	"9300": "Invalid/expired temporary token",
+	"9500": "Invalid authorization credentials",
+	"9503": "Invalid access rights",
+	"9700": "Generic server side error",
+	"9900": "Server is currently unavailable because traffic overload or it is down for maintenance",
+}
+
 type Tag30Req struct {
 	EventCode              string      `json:"eventCode"`
 	TransactionType        string      `json:"transactionType"`

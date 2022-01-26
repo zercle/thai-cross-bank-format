@@ -9,6 +9,21 @@ import (
 	"github.com/zercle/thai-cross-bank-proxy/pkg/datamodels"
 )
 
+var RespCode = map[string]string{
+	"000": "Success",
+	"210": "Time out",
+	"211": "Invalid data",
+	"212": "Duplicate transaction reference",
+	"213": "Invalid amount",
+	"214": "Pls. Contact service provider",
+	"331": "Invalid reference1/reference2",
+	"332": "Invalid payee ID",
+	"341": "Service Provider not ready",
+	"411": "Reference code expired",
+	"412": "Already paid",
+	"888": "Other Error",
+}
+
 // BBL: Bill Payment 2Ways
 // Payment Notification Service(v5.0)
 

@@ -11,6 +11,36 @@ import (
 	"github.com/zercle/thai-cross-bank-proxy/pkg/datamodels"
 )
 
+// PaymentChannel channel that customer pay
+var PaymentChannel = map[string]string{
+	"ATM":  "Automatic Teller Machine",
+	"CDM":  "Cash Deposit Machine",
+	"PHON": "ATM Phone",
+	"ENET": "SCB EasyNet",
+	"TELE": "SCB EasyPhone (Telebank)",
+	"TELL": "Counter",
+	"PTNR": "Partners' outlet",
+}
+
+// BillPaymentRespCode response code use in SCB's API
+var BillPaymentRespCode = map[string]string{
+	"0000": "Success",
+	"1xxx": "Invalid input data group",
+	"1000": "Invalid data",
+	"1001": "Invalid reference1",
+	"1002": "Invalid reference2",
+	"1003": "Invalid reference3",
+	"1004": "Invalid amount",
+	"2xxx": "Unable to process group",
+	"2000": "Unable to process transaction",
+	"2001": "Duplicate transaction",
+	"2002": "Over due",
+	"9xxx": "System error group",
+	"9000": "System error",
+	"9001": "System is busy",
+	"9002": "Time out",
+}
+
 type BillPaymentReq struct {
 	Request    string      `json:"request"`
 	User       string      `json:"user"`
