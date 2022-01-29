@@ -1,3 +1,5 @@
+// BBL: Bill Payment 2Ways
+// Payment Notification Service(v5.0)
 package bbl
 
 import (
@@ -9,6 +11,7 @@ import (
 	"github.com/zercle/thai-cross-bank-proxy/pkg/datamodels"
 )
 
+// BBL responseCode and responseMesg
 var RespCode = map[string]string{
 	"000": "Success",
 	"210": "Time out",
@@ -25,15 +28,14 @@ var RespCode = map[string]string{
 }
 
 const (
+	// BBL Request-Ref
 	HeaderRequestRef = "Request-Ref"
-	// yyyy-MM-dd'T'HH:mm:ss.SSS+07:00
-	// 2006-01-02T15:04:05.999Z07:00
+	// BBL Transmit-Date-Time format yyyy-MM-dd'T'HH:mm:ss.SSS+07:00
+	// eg: 2006-01-02T15:04:05.999Z07:00
 	HeaderTransmitTime = "Transmit-Date-Time"
 )
 
-// BBL: Bill Payment 2Ways
-// Payment Notification Service(v5.0)
-
+// BBL: Bill Payment request from bank
 type BillPaymentReq struct {
 	PayeeId    string      `json:"payeeId"`
 	TransDate  string      `json:"transDate"`
@@ -49,6 +51,7 @@ type BillPaymentReq struct {
 	RetryFlag  string      `json:"retryFlag"`
 }
 
+// Transform to transaction
 func (b BillPaymentReq) ToTransaction(result datamodels.Transaction, err error) {
 	// convert BBL time format into RFC3339
 	transactionTime, err := time.Parse(fmt.Sprintf("%sT%s+07:00", b.TransDate, b.TransTime), time.RFC3339)
@@ -82,6 +85,7 @@ func (b BillPaymentReq) ToTransaction(result datamodels.Transaction, err error) 
 	return
 }
 
+// BBL: Bill Payment response to bank
 type BillPaymentResp struct {
 	ResponseCode  string  `json:"responseCode"`
 	ResponseMesg  string  `json:"responseMesg"`
