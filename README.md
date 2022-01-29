@@ -1,2 +1,2 @@
-# thai-cross-bank-proxy
-Thailand cross bank bill payment proxy.
+# thai-cross-bank-format
+Thailand cross bank bill payment format.
