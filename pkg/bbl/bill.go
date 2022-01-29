@@ -24,6 +24,13 @@ var RespCode = map[string]string{
 	"888": "Other Error",
 }
 
+const (
+	HeaderRequestRef = "Request-Ref"
+	// yyyy-MM-dd'T'HH:mm:ss.SSS+07:00
+	// 2006-01-02T15:04:05.999Z07:00
+	HeaderTransmitTime = "Transmit-Date-Time"
+)
+
 // BBL: Bill Payment 2Ways
 // Payment Notification Service(v5.0)
 
@@ -39,6 +46,7 @@ type BillPaymentReq struct {
 	Reference2 string      `json:"reference2"`
 	Reference3 string      `json:"reference3"`
 	FromBank   string      `json:"fromBank"`
+	RetryFlag  string      `json:"retryFlag"`
 }
 
 func (b BillPaymentReq) ToTransaction(result datamodels.Transaction, err error) {
