@@ -41,6 +41,14 @@ var BillPaymentRespCode = map[string]string{
 	"9002": "Time out",
 }
 
+type RequestType string
+
+const (
+	ReqTypeVerify  RequestType = "verify"
+	ReqTypeConfirm RequestType = "confirm"
+	ReqTypeCancel  RequestType = "cancel"
+)
+
 type BillPaymentReq struct {
 	Request    string      `json:"request"`
 	User       string      `json:"user"`
