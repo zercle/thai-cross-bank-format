@@ -3,7 +3,7 @@ package c2p
 import (
 	"encoding/json"
 
-	"github.com/zercle/thai-cross-bank-proxy/pkg/datamodels"
+	"github.com/zercle/thai-cross-bank-format/pkg/datamodels"
 )
 
 type TokenReq struct {

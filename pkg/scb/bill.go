@@ -8,7 +8,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/zercle/thai-cross-bank-proxy/pkg/datamodels"
+	"github.com/zercle/thai-cross-bank-format/pkg/datamodels"
 )
 
 // PaymentChannel channel that customer pay

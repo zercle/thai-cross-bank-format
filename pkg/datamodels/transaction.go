@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"time"
 
-	bot "github.com/zercle/thai-cross-bank-proxy/pkg/bankofthailand"
+	bot "github.com/zercle/thai-cross-bank-format/pkg/bankofthailand"
 )
 
 type Transaction struct {

@@ -5,7 +5,7 @@ package ktb
 import (
 	"encoding/xml"
 
-	"github.com/zercle/thai-cross-bank-proxy/pkg/datamodels"
+	"github.com/zercle/thai-cross-bank-format/pkg/datamodels"
 )
 
 type BillPaymentReq struct {

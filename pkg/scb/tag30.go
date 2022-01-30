@@ -7,8 +7,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/zercle/thai-cross-bank-proxy/pkg/datamodels"
-	utils "github.com/zercle/thai-cross-bank-proxy/utils"
+	"github.com/zercle/thai-cross-bank-format/pkg/datamodels"
+	utils "github.com/zercle/thai-cross-bank-format/utils"
 )
 
 // Tag30ProxyType channel that customer pay

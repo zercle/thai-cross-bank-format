@@ -1,6 +1,6 @@
 package bbl
 
-import "github.com/zercle/thai-cross-bank-proxy/pkg/datamodels"
+import "github.com/zercle/thai-cross-bank-format/pkg/datamodels"
 
 type Tag30Req struct {
 }
