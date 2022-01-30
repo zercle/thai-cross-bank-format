@@ -1,3 +1,3 @@
-module github.com/zercle/thai-cross-bank-proxy
+module github.com/zercle/thai-cross-bank-format
 
 go 1.17
