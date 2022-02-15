@@ -25,6 +25,7 @@ type Transaction struct {
 	CurrencyCode  string      `json:"currencyCode"`
 	Channel       string      `json:"channelCode"`
 	Terminal      string      `json:"terminalCode"`
+	TxType        string      `json:"txType"`
 	TxRef         string      `json:"txRef"`
 	TxDateTime    time.Time   `json:"txDateTime"`
 	UserDefined1  string      `json:"userDefined1"`
