@@ -14,6 +14,8 @@ import (
 // BBL responseCode and responseMesg
 var RespCode = map[string]string{
 	"000": "Success",
+	"052": "Biller ID or Service Code not register",
+	"054": "System Unavailable",
 	"210": "Time out",
 	"211": "Invalid data",
 	"212": "Duplicate transaction reference",
@@ -25,6 +27,13 @@ var RespCode = map[string]string{
 	"411": "Reference code expired",
 	"412": "Already paid",
 	"888": "Other Error",
+}
+
+var Channel = map[string]string{
+	"A": "ATM",
+	"I": "Internet",
+	"P": "Phone",
+	"C": "Counter Bank",
 }
 
 const (
@@ -80,6 +89,10 @@ func (b BillPaymentReq) ToTransaction(result datamodels.Transaction, err error) 
 		Amount:        b.Amount,
 		TxRef:         b.TransRef,
 		TxDateTime:    transactionTime,
+	}
+
+	if channel, ok := Channel[b.Channel]; ok {
+		result.Channel = channel
 	}
 
 	return

@@ -1,3 +1,5 @@
+// BBL: Smart Bill Payment
+// Payment Notification Service(v0.8)
 package bbl
 
 import (
@@ -8,6 +10,27 @@ import (
 
 	"github.com/zercle/thai-cross-bank-format/pkg/datamodels"
 )
+
+var TermType = map[string]string{
+	"10": "IVR",
+	"20": "KIOSK",
+	"30": "ATM",
+	"40": "EDC/POS",
+	"50": "COUNTER",
+	"60": "IBANKING",
+	"70": "CDM",
+	"80": "MBANKING",
+}
+
+var TxnType = map[string]string{
+	"C": "payment transaction",
+	"D": "payment was cancelled/deleted",
+}
+
+var RetryFlag = map[string]string{
+	"Y": "retry/resend message",
+	"N": "original message",
+}
 
 type Tag30Req struct {
 	BillerId   string      `json:"payeeId"`
@@ -51,8 +74,8 @@ func (b Tag30Req) ToTransaction(result datamodels.Transaction, err error) {
 		Reference3:    b.Reference3,
 		Terminal:      b.TermType,
 		Amount:        b.Amount,
-		TxType:        b.TxnType,
-		TxDateTime:    transactionTime,
+		// TxType:        b.TxnType,
+		TxDateTime: transactionTime,
 	}
 
 	billerId := []rune(b.BillerId)
@@ -60,19 +83,15 @@ func (b Tag30Req) ToTransaction(result datamodels.Transaction, err error) {
 	if len(billerId) >= 13 {
 		result.PayeePID = string(billerId[:13])
 	}
+
+	if termType, ok := TermType[b.TermType]; ok {
+		result.Channel = termType
+	}
+
 	return
 }
 
 type Tag30Resp struct {
-	ResponseCode  string  `json:"responseCode"`
-	ResponseMesg  string  `json:"responseMesg"`
-	RspAmount     float64 `json:"rspAmount"`
-	RspReference1 string  `json:"rspReference1"`
-	RspReference2 string  `json:"rspReference2"`
-	RspReference3 string  `json:"rspReference3"`
-	UserData1     string  `json:"userData1"`
-	UserData2     string  `json:"userData2"`
-	UserData3     string  `json:"userData3"`
-	UserData4     string  `json:"userData4"`
-	UserData5     string  `json:"userData5"`
+	ResponseCode string `json:"responseCode"`
+	ResponseMesg string `json:"responseMesg"`
 }
