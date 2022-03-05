@@ -33,7 +33,7 @@ var RetryFlag = map[string]string{
 }
 
 type Tag30Req struct {
-	BillerId   string      `json:"payeeId"`
+	BillerId   string      `json:"billerId"`
 	TransDate  string      `json:"transDate"`
 	TransTime  string      `json:"transTime"`
 	TermType   string      `json:"termType"`
