@@ -33,19 +33,21 @@ var RetryFlag = map[string]string{
 }
 
 type Tag30Req struct {
-	BillerId   string      `json:"billerId"`
-	TransDate  string      `json:"transDate"`
-	TransTime  string      `json:"transTime"`
-	TermType   string      `json:"termType"`
-	Amount     json.Number `json:"amount"`
-	Reference1 string      `json:"reference1"`
-	Reference2 string      `json:"reference2"`
-	Reference3 string      `json:"reference3"`
-	FromBank   string      `json:"fromBank"`
-	FromBranch string      `json:"fromBranch"`
-	FromName   string      `json:"fromName"`
-	TxnType    string      `json:"txnType"`
-	RetryFlag  string      `json:"retryFlag"`
+	BillerId     string      `json:"billerId"`
+	TransDate    string      `json:"transDate"`
+	TransTime    string      `json:"transTime"`
+	TermType     string      `json:"termType"`
+	Amount       json.Number `json:"amount"`
+	Reference1   string      `json:"reference1"`
+	Reference2   string      `json:"reference2"`
+	Reference3   string      `json:"reference3"`
+	FromBank     string      `json:"fromBank"`
+	FromBranch   string      `json:"fromBranch"`
+	FromName     string      `json:"fromName"`
+	BankRef      string      `json:"bankRef"`
+	ApprovalCode string      `json:"approvalCode"`
+	TxnType      string      `json:"txnType"`
+	RetryFlag    string      `json:"retryFlag"`
 }
 
 func (b Tag30Req) ToTransaction() (result datamodels.Transaction, err error) {
@@ -74,8 +76,8 @@ func (b Tag30Req) ToTransaction() (result datamodels.Transaction, err error) {
 		Reference3:    b.Reference3,
 		Terminal:      b.TermType,
 		Amount:        b.Amount,
-		// TxType:        b.TxnType,
-		TxDateTime: transactionTime,
+		TxRef:         b.BankRef,
+		TxDateTime:    transactionTime,
 	}
 
 	billerId := []rune(b.BillerId)
