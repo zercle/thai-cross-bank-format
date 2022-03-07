@@ -48,7 +48,7 @@ type Tag30Req struct {
 	RetryFlag  string      `json:"retryFlag"`
 }
 
-func (b Tag30Req) ToTransaction(result datamodels.Transaction, err error) {
+func (b Tag30Req) ToTransaction() (result datamodels.Transaction, err error) {
 	// convert BBL time format into RFC3339
 	transactionTime, err := time.Parse(fmt.Sprintf("%sT%s+07:00", b.TransDate, b.TransTime), time.RFC3339)
 

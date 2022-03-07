@@ -39,7 +39,7 @@ type BillPaymentReqCode struct {
 	Ref4     string   `xml:"ref4"`
 }
 
-func (b BillPaymentReqCode) ToTransaction(result datamodels.Transaction, err error) {
+func (b BillPaymentReqCode) ToTransaction() (result datamodels.Transaction, err error) {
 	return
 }
 

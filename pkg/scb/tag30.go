@@ -71,7 +71,7 @@ type Tag30Req struct {
 	TepaCode               string      `json:"tepaCode"`
 }
 
-func (b Tag30Req) ToTransaction(result datamodels.Transaction, err error) {
+func (b Tag30Req) ToTransaction() (result datamodels.Transaction, err error) {
 	// convert SCB time format into RFC3339
 	transactionTime, err := time.Parse(b.TransactionDateAndTime, utils.RFC3339Mili)
 

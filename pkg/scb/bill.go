@@ -65,7 +65,7 @@ type BillPaymentReq struct {
 	TerminalId string      `json:"terminalID"`
 }
 
-func (b BillPaymentReq) ToTransaction(result datamodels.Transaction, err error) {
+func (b BillPaymentReq) ToTransaction() (result datamodels.Transaction, err error) {
 	// convert SCB time format into RFC3339
 	transactionTime, err := time.Parse(fmt.Sprintf("%s+07:00", b.TranDate), time.RFC3339)
 

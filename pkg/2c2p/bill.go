@@ -53,6 +53,6 @@ type BillPaymentResp struct {
 	RespDesc                      string      `json:"respDesc"`
 }
 
-func (b BillPaymentResp) ToTransaction(result datamodels.Transaction, err error) {
+func (b BillPaymentResp) ToTransaction() (result datamodels.Transaction, err error) {
 	return
 }
