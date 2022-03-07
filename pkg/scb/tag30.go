@@ -73,7 +73,7 @@ type Tag30Req struct {
 
 func (b Tag30Req) ToTransaction() (result datamodels.Transaction, err error) {
 	// convert SCB time format into RFC3339
-	transactionTime, err := time.Parse(b.TransactionDateAndTime, utils.RFC3339Mili)
+	transactionTime, err := time.Parse(utils.RFC3339Mili, b.TransactionDateAndTime)
 
 	if err != nil {
 		log.Printf("%+v", err)
