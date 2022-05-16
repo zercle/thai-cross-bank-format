@@ -3,10 +3,11 @@
 package bbl
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"time"
+
+	"github.com/segmentio/encoding/json"
 
 	"github.com/zercle/thai-cross-bank-format/pkg/datamodels"
 )

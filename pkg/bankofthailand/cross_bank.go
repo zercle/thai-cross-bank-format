@@ -1,6 +1,6 @@
 package bankofthailand
 
-import "encoding/json"
+import "github.com/segmentio/encoding/json"
 
 // Bank Of Thailand: cross bank bill payment
 

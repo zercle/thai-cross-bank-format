@@ -1,8 +1,9 @@
 package paypal
 
 import (
-	"encoding/json"
 	"time"
+
+	"github.com/segmentio/encoding/json"
 )
 
 type PerchaseUnit struct {

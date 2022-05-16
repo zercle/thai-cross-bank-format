@@ -3,11 +3,11 @@ package scb
 // SCB: Bill Payment Host-to-Host
 // interface specification (v1.4)
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"time"
 
+	"github.com/segmentio/encoding/json"
 	"github.com/zercle/thai-cross-bank-format/pkg/datamodels"
 )
 

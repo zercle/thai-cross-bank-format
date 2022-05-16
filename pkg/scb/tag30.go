@@ -3,10 +3,10 @@ package scb
 // SCB: QR Payment
 // API Specification for Payment Confirmation (v1.0.2.2)
 import (
-	"encoding/json"
 	"log"
 	"time"
 
+	"github.com/segmentio/encoding/json"
 	"github.com/zercle/thai-cross-bank-format/pkg/datamodels"
 	utils "github.com/zercle/thai-cross-bank-format/utils"
 )
