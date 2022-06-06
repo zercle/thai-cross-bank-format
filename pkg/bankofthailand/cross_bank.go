@@ -68,6 +68,11 @@ type CrossBankBillPaymentTotal struct {
 }
 
 func ConvertTxtToStruct(source io.Reader) (result CrossBankBillPayment, err error) {
+	// set timezone to Thailand
+	loc, err := time.LoadLocation("Asia/Bangkok")
+	if err != nil {
+		return
+	}
 	// Thai bank file encode in TIS-620
 	reader, err := iconv.NewReader(source, "tis-620", "utf-8")
 	if err != nil {
@@ -100,7 +105,7 @@ scanLoop:
 			// fmt.Printf("etc: %s\n", string(line[76:256]))
 			payeeName := string(line[20:60])
 			dataDateStr := string(line[64:68]) + "-" + string(line[62:64]) + "-" + string(line[60:62])
-			dataDate, _ := time.Parse("2006-01-02", dataDateStr)
+			dataDate, _ := time.ParseInLocation("2006-01-02", dataDateStr, loc)
 			serviceCode := string(line[68:76])
 			spare := string(line[76:256])
 
