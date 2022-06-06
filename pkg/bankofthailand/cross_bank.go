@@ -141,8 +141,8 @@ scanLoop:
 			// "2006-01-02T15:04:05Z07:00"
 			payDateStr := string(line[24:28]) + "-" + string(line[22:24]) + "-" + string(line[20:22])
 			payTimeStr := string(line[28:30]) + ":" + string(line[30:32]) + ":" + string(line[32:34])
-			payDate, _ := time.Parse("2006-01-02", payDateStr)
-			payTime, _ := time.Parse("15:04:05", payTimeStr)
+			payDate, _ := time.ParseInLocation("2006-01-02", payDateStr, loc)
+			payTime, _ := time.ParseInLocation("15:04:05", payTimeStr, loc)
 			custName := string(line[34:84])
 			ref1 := string(line[84:104])
 			ref2 := string(line[104:124])
