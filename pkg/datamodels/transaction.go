@@ -38,12 +38,14 @@ type Transaction struct {
 
 func (b Transaction) ToCrossBank(result bot.CrossBankBillPaymentDetail) {
 	result = bot.CrossBankBillPaymentDetail{
-		RecordType:        "D", // Detail
-		BankCode:          b.PayeeBankCode,
-		BranchNo:          b.PayeeBranchNo,
-		CompanyAccount:    b.PayeeAcc,
-		PaymentDate:       b.TxDateTime.Format("2006-01-02"),
-		PaymentTime:       b.TxDateTime.Format("15:04:05"),
+		RecordType:     "D", // Detail
+		BankCode:       b.PayeeBankCode,
+		BranchNo:       b.PayeeBranchNo,
+		CompanyAccount: b.PayeeAcc,
+		// PaymentDate:       b.TxDateTime.Format("2006-01-02"),
+		// PaymentTime:       b.TxDateTime.Format("15:04:05"),
+		PaymentDate:       time.Date(b.TxDateTime.Year(), b.TxDateTime.Month(), b.TxDateTime.Day(), 0, 0, 0, 0, nil),
+		PaymentTime:       time.Date(0, 0, 0, b.TxDateTime.Hour(), b.TxDateTime.Minute(), b.TxDateTime.Second(), 0, nil),
 		CustomerName:      b.PayerName,
 		Ref1:              b.Reference1,
 		Ref2:              b.Reference2,
