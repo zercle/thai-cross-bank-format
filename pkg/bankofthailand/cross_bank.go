@@ -99,7 +99,7 @@ scanLoop:
 			// fmt.Printf("service code: %s\n", string(line[68:76]))
 			// fmt.Printf("etc: %s\n", string(line[76:256]))
 			payeeName := string(line[20:60])
-			dataDateStr := string(line[64:68]) + "-" + string(line[62:64]) + "-" + string(line[60:62])
+			dataDateStr := string(line[64:68]) + "-" + string(line[62:64]) + "-" + string(line[60:62]) + "T00:00:00Z07:00"
 			dataDate, _ := time.Parse("2006-01-02", dataDateStr)
 			serviceCode := string(line[68:76])
 			spare := string(line[76:256])
@@ -134,7 +134,7 @@ scanLoop:
 			// fmt.Printf("payer bank code: %s\n", string(line[243:246]))
 			// fmt.Printf("new cheque no: %s\n", string(line[246:256]))
 			// "2006-01-02T15:04:05Z07:00"
-			payDateTimeString := string(line[24:28]) + "-" + string(line[22:24]) + "-" + string(line[20:22]) + "T" + string(line[28:30]) + ":" + string(line[30:32]) + ":" + string(line[32:34]) + "+07:00"
+			payDateTimeString := string(line[24:28]) + "-" + string(line[22:24]) + "-" + string(line[20:22]) + "T" + string(line[28:30]) + ":" + string(line[30:32]) + ":" + string(line[32:34]) + "Z07:00"
 			payDate, _ := time.Parse("2006-01-02", payDateTimeString)
 			payTime, _ := time.Parse("15:04:05", payDateTimeString)
 			custName := string(line[34:84])
