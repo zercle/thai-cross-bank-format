@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/djimenez/iconv-go"
+	iconv "github.com/qiniu/iconv"
 	"github.com/segmentio/encoding/json"
 )
 
@@ -74,10 +74,14 @@ func ConvertTxtToStruct(source io.Reader) (result CrossBankBillPayment, err erro
 		return
 	}
 	// Thai bank file encode in TIS-620
-	reader, err := iconv.NewReader(source, "tis-620", "utf-8")
+	cd, err := iconv.Open("utf-8", "tis-620")
+	// reader, err := iconv.NewReader(source, "tis-620", "utf-8")
 	if err != nil {
 		return
 	}
+	defer cd.Close()
+	bufSize := 0 // default if zero
+	reader := iconv.NewReader(cd, source, bufSize)
 	scanner := bufio.NewScanner(reader)
 	var line []rune
 	var headerLine CrossBankBillPaymentHeader
