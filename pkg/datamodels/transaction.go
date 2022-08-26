@@ -5,15 +5,7 @@ import (
 
 	"github.com/segmentio/encoding/json"
 
-	bot "github.com/zercle/thai-cross-bank-format/pkg/bankofthailand"
-)
-
-const (
-	RecordHeader string = "H"
-	RecordDetail string = "D"
-	RecordTotal  string = "T"
-	KindDebit    string = "D"
-	KindCredit   string = "C"
+	both "github.com/zercle/thai-cross-bank-format/pkg/bankofthailand"
 )
 
 type Transaction struct {
@@ -45,9 +37,9 @@ type Transaction struct {
 	UserDefined5  string      `json:"userDefined5"`  // อื่น ๆ 5
 }
 
-func (b Transaction) ToCrossBank(result bot.CrossBankBillPaymentDetail) {
-	result = bot.CrossBankBillPaymentDetail{
-		RecordType:     RecordDetail, // Detail
+func (b Transaction) ToCrossBank(result both.CrossBankBillPaymentDetail) {
+	result = both.CrossBankBillPaymentDetail{
+		RecordType:     both.RecordDetail, // Detail
 		BankCode:       b.PayeeBankCode,
 		BranchNo:       b.PayeeBranchNo,
 		CompanyAccount: b.PayeeAcc,
@@ -60,7 +52,7 @@ func (b Transaction) ToCrossBank(result bot.CrossBankBillPaymentDetail) {
 		Ref2:              b.Reference2,
 		Ref3:              b.Reference3,
 		TellerNo:          b.Terminal,
-		KindOfTransaction: KindDebit,
+		KindOfTransaction: both.KindDebit,
 		Amount:            b.Amount,
 		SendingBankCode:   b.PayerBankCode,
 	}
@@ -68,6 +60,4 @@ func (b Transaction) ToCrossBank(result bot.CrossBankBillPaymentDetail) {
 	if len(b.PayeePID) >= 15 {
 		result.BillerId = b.PayeePID
 	}
-
-	return
 }

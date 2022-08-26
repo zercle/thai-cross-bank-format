@@ -11,6 +11,14 @@ import (
 	"github.com/segmentio/encoding/json"
 )
 
+const (
+	RecordHeader string = "H"
+	RecordDetail string = "D"
+	RecordTotal  string = "T"
+	KindDebit    string = "D"
+	KindCredit   string = "C"
+)
+
 // Bank Of Thailand: cross bank bill payment
 
 type CrossBankBillPayment struct {
@@ -102,7 +110,7 @@ scanLoop:
 		bankCode := string(line[7:10])
 		payeeAcc := string(line[10:20])
 		switch recordType {
-		case "H":
+		case RecordHeader:
 			// fmt.Printf("payee name: %s\n", string(line[20:60]))
 			// fmt.Printf("data date: %s\n", string(line[60:68]))
 			// fmt.Printf("service code: %s\n", string(line[68:76]))
@@ -123,7 +131,7 @@ scanLoop:
 				ServiceCode:    strings.TrimSpace(serviceCode),
 				Spare:          strings.TrimSpace(spare),
 			}
-		case "D":
+		case RecordDetail:
 			// fmt.Printf("payment date: %s\n", string(line[20:28]))
 			// fmt.Printf("payment time: %s\n", string(line[28:34]))
 			// fmt.Printf("cust name: %s\n", string(line[34:84]))
@@ -192,7 +200,7 @@ scanLoop:
 				NewChequeNo:       strings.TrimSpace(ncn),
 			}
 			detailLines = append(detailLines, detailLine)
-		case "T":
+		case RecordTotal:
 			// fmt.Printf("total debit amount: %s\n", string(line[20:33]))
 			// fmt.Printf("total debit transaction: %s\n", string(line[33:39]))
 			// fmt.Printf("total credit amount: %s\n", string(line[39:52]))
