@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/segmentio/encoding/json"
+	"github.com/zercle/thai-cross-bank-format/pkg/bankofthailand"
 	"github.com/zercle/thai-cross-bank-format/pkg/datamodels"
 	utils "github.com/zercle/thai-cross-bank-format/utils"
 )
@@ -87,7 +88,7 @@ func (b Tag30Req) ToTransaction() (result datamodels.Transaction, err error) {
 	}
 
 	result = datamodels.Transaction{
-		PayeeBankCode: "014", // SCB
+		PayeeBankCode: bankofthailand.BankCode["SCB"], // SCB
 		PayeeAcc:      b.PayeeAccountNumber,
 		PayeeName:     b.PayeeName,
 		PayeePID:      b.PayeeProxyId,

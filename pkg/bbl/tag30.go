@@ -9,6 +9,7 @@ import (
 
 	"github.com/segmentio/encoding/json"
 
+	"github.com/zercle/thai-cross-bank-format/pkg/bankofthailand"
 	"github.com/zercle/thai-cross-bank-format/pkg/datamodels"
 )
 
@@ -68,7 +69,7 @@ func (b Tag30Req) ToTransaction() (result datamodels.Transaction, err error) {
 	}
 
 	result = datamodels.Transaction{
-		PayeeBankCode: "002", // BBL
+		PayeeBankCode: bankofthailand.BankCode["BBL"], // BBL
 		PayerBankCode: b.FromBank,
 		PayerBranchNo: b.FromBranch,
 		PayerName:     b.FromName,

@@ -8,37 +8,46 @@ import (
 	bot "github.com/zercle/thai-cross-bank-format/pkg/bankofthailand"
 )
 
+const (
+	RecordHeader string = "H"
+	RecordDetail string = "D"
+	RecordTotal  string = "T"
+	KindDebit    string = "D"
+	KindCredit   string = "C"
+)
+
 type Transaction struct {
-	PayeePID      string      `json:"payeePID"`
-	PayeeBankCode string      `json:"payeeBankCode"`
-	PayeeBranchNo string      `json:"payeeBranchNo"`
-	PayeeAcc      string      `json:"payeeAcc"`
-	PayeeName     string      `json:"payeeName"`
-	PayerPID      string      `json:"payerPID"`
-	PayerBankCode string      `json:"payerBankCode"`
-	PayerBranchNo string      `json:"payerBranchNo"`
-	PayerAcc      string      `json:"payerAcc"`
-	PayerName     string      `json:"payerName"`
-	Reference1    string      `json:"reference1"`
-	Reference2    string      `json:"reference2"`
-	Reference3    string      `json:"reference3"`
-	Amount        json.Number `json:"amount"`
-	CurrencyCode  string      `json:"currencyCode"`
-	Channel       string      `json:"channelCode"`
-	Terminal      string      `json:"terminalCode"`
-	TxType        string      `json:"txType"`
-	TxRef         string      `json:"txRef"`
-	TxDateTime    time.Time   `json:"txDateTime"`
-	UserDefined1  string      `json:"userDefined1"`
-	UserDefined2  string      `json:"userDefined2"`
-	UserDefined3  string      `json:"userDefined3"`
-	UserDefined4  string      `json:"userDefined4"`
-	UserDefined5  string      `json:"userDefined5"`
+	PayeePID      string      `json:"payeePID"`      // หมายเลขประจำตัวผู้รับเงิน
+	PayeeBankCode string      `json:"payeeBankCode"` // ธนาคารผู้รับเงิน
+	PayeeBranchNo string      `json:"payeeBranchNo"` // สาขาผู้รับเงิน
+	PayeeAcc      string      `json:"payeeAcc"`      // บัญชีผู้รับเงิน
+	PayeeName     string      `json:"payeeName"`     // ชื่อผู้รับเงิน
+	PayerPID      string      `json:"payerPID"`      // หมายเลขประจำตัวผู้ชำระเงิน
+	PayerBankCode string      `json:"payerBankCode"` // ธนาคารผู้ชำระเงิน
+	PayerBranchNo string      `json:"payerBranchNo"` // สาขาผู้ชำระเงิน
+	PayerAcc      string      `json:"payerAcc"`      // บัญชีผู้ชำระเงิน
+	PayerName     string      `json:"payerName"`     // ชื่อผู้ชำระเงิน
+	Reference1    string      `json:"reference1"`    // หมายเลขลูกค้า 1
+	Reference2    string      `json:"reference2"`    // หมายเลขลูกค้า 2
+	Reference3    string      `json:"reference3"`    // หมายเลขลูกค้า 3
+	Amount        json.Number `json:"amount"`        // จำนวนเงิน
+	CurrencyCode  string      `json:"currencyCode"`  // รหัสสกุลเงิน
+	Channel       string      `json:"channelCode"`   // ช่องทางชำระเงิน
+	Terminal      string      `json:"terminalCode"`  // หมายเลขช่องทางชำระเงิน
+	KindOfTx      string      `json:"kindOfTx"`      // ประเภทของการชำระเงิน
+	TxType        string      `json:"txType"`        // ประเภทของรายการ
+	TxRef         string      `json:"txRef"`         // หมายเลขประจำรายการ
+	TxDateTime    time.Time   `json:"txDateTime"`    // เวลาทำรายการ
+	UserDefined1  string      `json:"userDefined1"`  // อื่น ๆ 1
+	UserDefined2  string      `json:"userDefined2"`  // อื่น ๆ 2
+	UserDefined3  string      `json:"userDefined3"`  // อื่น ๆ 3
+	UserDefined4  string      `json:"userDefined4"`  // อื่น ๆ 4
+	UserDefined5  string      `json:"userDefined5"`  // อื่น ๆ 5
 }
 
 func (b Transaction) ToCrossBank(result bot.CrossBankBillPaymentDetail) {
 	result = bot.CrossBankBillPaymentDetail{
-		RecordType:     "D", // Detail
+		RecordType:     RecordDetail, // Detail
 		BankCode:       b.PayeeBankCode,
 		BranchNo:       b.PayeeBranchNo,
 		CompanyAccount: b.PayeeAcc,
@@ -51,7 +60,7 @@ func (b Transaction) ToCrossBank(result bot.CrossBankBillPaymentDetail) {
 		Ref2:              b.Reference2,
 		Ref3:              b.Reference3,
 		TellerNo:          b.Terminal,
-		KindOfTransaction: "D", // Debit
+		KindOfTransaction: KindDebit,
 		Amount:            b.Amount,
 		SendingBankCode:   b.PayerBankCode,
 	}
