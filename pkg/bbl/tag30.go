@@ -77,6 +77,7 @@ func (b Tag30Req) ToTransaction() (result datamodels.Transaction, err error) {
 		Reference3:    b.Reference3,
 		Terminal:      b.TermType,
 		Amount:        b.Amount,
+		TxType:        b.TermType,
 		TxRef:         b.BankRef,
 		TxDateTime:    transactionTime,
 	}

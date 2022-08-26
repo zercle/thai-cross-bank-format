@@ -1,6 +1,6 @@
 module github.com/zercle/thai-cross-bank-format
 
-go 1.18
+go 1.19
 
 require (
 	github.com/qiniu/iconv v1.2.0
@@ -9,5 +9,5 @@ require (
 
 require (
 	github.com/segmentio/asm v1.2.0 // indirect
-	golang.org/x/sys v0.0.0-20220624220833-87e55d714810 // indirect
+	golang.org/x/sys v0.0.0-20220825204002-c680a09ffe64 // indirect
 )
