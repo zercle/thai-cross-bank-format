@@ -9,7 +9,7 @@ import (
 	"github.com/segmentio/encoding/json"
 	"github.com/zercle/thai-cross-bank-format/pkg/bankofthailand"
 	"github.com/zercle/thai-cross-bank-format/pkg/datamodels"
-	utils "github.com/zercle/thai-cross-bank-format/utils"
+	local_time "github.com/zercle/thai-cross-bank-format/time"
 )
 
 // Tag30ProxyType channel that customer pay
@@ -74,7 +74,7 @@ type Tag30Req struct {
 
 func (b Tag30Req) ToTransaction() (result datamodels.Transaction, err error) {
 	// convert SCB time format into RFC3339
-	transactionTime, err := time.Parse(utils.RFC3339Mili, b.TransactionDateAndTime)
+	transactionTime, err := time.Parse(local_time.RFC3339Milli, b.TransactionDateAndTime)
 
 	if err != nil {
 		log.Printf("%+v", err)
