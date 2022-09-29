@@ -68,7 +68,7 @@ type BillPaymentReq struct {
 
 func (b BillPaymentReq) ToTransaction() (result datamodels.Transaction, err error) {
 	// convert SCB time format into RFC3339
-	transactionTime, err := time.Parse(time.RFC3339, fmt.Sprintf("%s+07:00", b.TranDate))
+	transactionTime, err := time.ParseInLocation(time.RFC3339, fmt.Sprintf("%s+07:00", b.TranDate), time.Local)
 
 	if err != nil {
 		log.Printf("%+v", err)

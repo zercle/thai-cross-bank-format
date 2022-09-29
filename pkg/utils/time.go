@@ -1,4 +1,4 @@
-package time
+package utils
 
 import (
 	"errors"
@@ -37,7 +37,7 @@ func (t *TimeMilli) UnmarshalJSON(data []byte) (err error) {
 		return nil
 	}
 	// Fractional seconds are handled implicitly by Parse.
-	tmp, err := time.Parse(`"`+RFC3339Milli+`"`, string(data))
+	tmp, err := time.ParseInLocation(`"`+RFC3339Milli+`"`, string(data), time.Local)
 	*t = TimeMilli(tmp)
 	return
 }
@@ -55,7 +55,7 @@ func (t TimeMilli) MarshalText() ([]byte, error) {
 // UnmarshalText implements the encoding.TextUnmarshaler interface.
 func (t *TimeMilli) UnmarshalText(data []byte) (err error) {
 	// Fractional seconds are handled implicitly by Parse.
-	tmp, err := time.Parse(RFC3339Milli, string(data))
+	tmp, err := time.ParseInLocation(RFC3339Milli, string(data), time.Local)
 	*t = TimeMilli(tmp)
 	return
 }

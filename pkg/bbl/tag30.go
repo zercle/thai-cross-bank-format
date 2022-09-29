@@ -54,7 +54,7 @@ type Tag30Req struct {
 
 func (b Tag30Req) ToTransaction() (result datamodels.Transaction, err error) {
 	// convert BBL time format into RFC3339
-	transactionTime, err := time.Parse(time.RFC3339, fmt.Sprintf("%sT%s+07:00", b.TransDate, b.TransTime))
+	transactionTime, err := time.ParseInLocation(time.RFC3339, fmt.Sprintf("%sT%s+07:00", b.TransDate, b.TransTime), time.Local)
 
 	if err != nil {
 		log.Printf("%+v", err)
