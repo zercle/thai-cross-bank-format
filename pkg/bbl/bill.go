@@ -54,7 +54,7 @@ type BillPaymentReq struct {
 	TransRef   string      `json:"transRef"`
 	Channel    string      `json:"channel"`
 	TermId     string      `json:"termId"`
-	Amount     json.Number `json:"amount"`
+	Amount     json.Number `json:"amount,string"`
 	Reference1 string      `json:"reference1"`
 	Reference2 string      `json:"reference2"`
 	Reference3 string      `json:"reference3"`

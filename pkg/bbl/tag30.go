@@ -39,7 +39,7 @@ type Tag30Req struct {
 	TransDate    string      `json:"transDate"`
 	TransTime    string      `json:"transTime"`
 	TermType     string      `json:"termType"`
-	Amount       json.Number `json:"amount"`
+	Amount       json.Number `json:"amount,string"`
 	Reference1   string      `json:"reference1"`
 	Reference2   string      `json:"reference2"`
 	Reference3   string      `json:"reference3"`
