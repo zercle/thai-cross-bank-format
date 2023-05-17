@@ -2,13 +2,13 @@ package bankofthailand
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"io"
 	"strings"
 	"time"
 
 	iconv "github.com/qiniu/iconv"
-	"github.com/segmentio/encoding/json"
 )
 
 const (

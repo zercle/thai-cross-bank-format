@@ -1,9 +1,8 @@
 package datamodels
 
 import (
+	"encoding/json"
 	"time"
-
-	"github.com/segmentio/encoding/json"
 
 	both "github.com/zercle/thai-cross-bank-format/pkg/bankofthailand"
 )

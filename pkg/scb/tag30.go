@@ -6,7 +6,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/segmentio/encoding/json"
+	"encoding/json"
+
 	"github.com/zercle/thai-cross-bank-format/pkg/bankofthailand"
 	"github.com/zercle/thai-cross-bank-format/pkg/datamodels"
 	"github.com/zercle/thai-cross-bank-format/pkg/utils"

@@ -1,7 +1,7 @@
 package c2p
 
 import (
-	"github.com/segmentio/encoding/json"
+	"encoding/json"
 
 	"github.com/zercle/thai-cross-bank-format/pkg/datamodels"
 )
