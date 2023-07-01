@@ -8,7 +8,7 @@ import (
 const (
 	DateFmt      = "2006-01-02"
 	TimeFmt      = "15:04:00"
-	DateTimeFmt  = "2006-01-02 15:04:00"
+	DateTimeFmt  = "2006-01-02 15:04:05"
 	RFC3339Milli = "2006-01-02T15:04:05.999Z07:00"
 )
 
