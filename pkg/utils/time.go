@@ -9,7 +9,7 @@ const (
 	DateFmt      = "2006-01-02"
 	TimeFmt      = "15:04:00"
 	DateTimeFmt  = "2006-01-02 15:04:00"
-	RFC3339Milli = "2006-01-02T15:04:05.000Z07:00"
+	RFC3339Milli = "2006-01-02T15:04:05.999Z07:00"
 )
 
 type TimeMilli time.Time
