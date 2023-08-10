@@ -6,10 +6,10 @@ import (
 )
 
 type PerchaseUnit struct {
-	ReferenceId string
 	Shipping    Shipping
-	Payments    []Payment
 	Amount      Amount
+	ReferenceId string
+	Payments    []Payment
 }
 
 type Payment struct {
@@ -29,17 +29,17 @@ type Authorization struct {
 }
 
 type Capture struct {
-	Id                        string
-	Status                    string
-	Amount                    Amount
-	SellerProtection          SellerProtection
-	FinalCapture              bool
-	DisbursementMode          string
-	SellerReceivableBreakdown SellerReceivableBreakdown
 	ExpirationTime            time.Time
 	CreateTime                time.Time
 	UpdateTime                time.Time
+	SellerReceivableBreakdown SellerReceivableBreakdown
+	Amount                    Amount
+	Id                        string
+	Status                    string
+	DisbursementMode          string
+	SellerProtection          SellerProtection
 	Links                     []Link
+	FinalCapture              bool
 }
 
 type Amount struct {

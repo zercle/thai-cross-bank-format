@@ -16,8 +16,8 @@ type TimeMilli time.Time
 
 // MarshalJSON implements the json.Marshaler interface.
 // The time is a quoted string in RFC 3339 format, with sub-second precision added if present.
-func (t TimeMilli) MarshalJSON() (buff []byte, err error) {
-	if y := time.Time(t).Year(); y < 0 || y >= 10000 {
+func (t *TimeMilli) MarshalJSON() (buff []byte, err error) {
+	if y := time.Time(*t).Year(); y < 0 || y >= 10000 {
 		// RFC 3339 is clear that years are 4 digits exactly.
 		// See golang.org/issue/4556#c15 for more discussion.
 		return nil, errors.New("Time.MarshalJSON: year outside of range [0,9999]")
@@ -25,7 +25,7 @@ func (t TimeMilli) MarshalJSON() (buff []byte, err error) {
 
 	buff = make([]byte, 0, len(RFC3339Milli)+2)
 	buff = append(buff, '"')
-	buff = time.Time(t).AppendFormat(buff, RFC3339Milli)
+	buff = time.Time(*t).AppendFormat(buff, RFC3339Milli)
 	buff = append(buff, '"')
 	return
 }
@@ -43,13 +43,13 @@ func (t *TimeMilli) UnmarshalJSON(data []byte) (err error) {
 }
 
 // MarshalText implements the encoding.TextMarshaler interface.
-func (t TimeMilli) MarshalText() ([]byte, error) {
-	if y := time.Time(t).Year(); y < 0 || y >= 10000 {
+func (t *TimeMilli) MarshalText() ([]byte, error) {
+	if y := time.Time(*t).Year(); y < 0 || y >= 10000 {
 		return nil, errors.New("Time.MarshalText: year outside of range [0,9999]")
 	}
 
 	b := make([]byte, 0, len(RFC3339Milli))
-	return time.Time(t).AppendFormat(b, RFC3339Milli), nil
+	return time.Time(*t).AppendFormat(b, RFC3339Milli), nil
 }
 
 // UnmarshalText implements the encoding.TextUnmarshaler interface.

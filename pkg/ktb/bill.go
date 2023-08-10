@@ -20,23 +20,23 @@ type BillPaymentReqBody struct {
 
 type BillPaymentReqCode struct {
 	XMLName  xml.Name `xml:"RequestCode"`
-	User     string   `xml:"user"`
-	Password string   `xml:"password"`
-	Comcode  string   `xml:"comcode"`
-	Prodcode string   `xml:"prodcode"`
-	Command  string   `xml:"command"`
-	Bankcode int      `xml:"bankcode"`
-	Bankref  string   `xml:"bankref"`
 	TranxId  string   `xml:"tranxid,omitempty"`
+	Ref1     string   `xml:"ref1"`
 	Datetime string   `xml:"datetime"`
+	Prodcode string   `xml:"prodcode"`
 	Effdate  string   `xml:"effdate"`
-	Amount   float64  `xml:"amount,omitempty"`
+	Ref4     string   `xml:"ref4"`
+	Bankref  string   `xml:"bankref"`
+	Ref3     string   `xml:"ref3"`
+	Comcode  string   `xml:"comcode"`
+	Command  string   `xml:"command"`
+	User     string   `xml:"user"`
 	Channel  string   `xml:"channel"`
 	Cusname  string   `xml:"cusname,omitempty"`
-	Ref1     string   `xml:"ref1"`
+	Password string   `xml:"password"`
 	Ref2     string   `xml:"ref2"`
-	Ref3     string   `xml:"ref3"`
-	Ref4     string   `xml:"ref4"`
+	Amount   float64  `xml:"amount,omitempty"`
+	Bankcode int      `xml:"bankcode"`
 }
 
 func (b BillPaymentReqCode) ToTransaction() (result datamodels.Transaction, err error) {

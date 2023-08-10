@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	iconv "github.com/qiniu/iconv"
+	"golang.org/x/text/encoding/charmap"
 )
 
 const (
@@ -22,9 +22,9 @@ const (
 // Bank Of Thailand: cross bank bill payment
 
 type CrossBankBillPayment struct {
+	Total   CrossBankBillPaymentTotal    `json:"total"`
 	Header  CrossBankBillPaymentHeader   `json:"header"`
 	Details []CrossBankBillPaymentDetail `json:"details"`
-	Total   CrossBankBillPaymentTotal    `json:"total"`
 }
 
 type CrossBankBillPaymentHeader struct {
@@ -82,14 +82,8 @@ func ConvertTxtToStruct(source io.Reader) (result CrossBankBillPayment, err erro
 		return
 	}
 	// Thai bank file encode in TIS-620
-	cd, err := iconv.Open("utf-8", "tis-620")
-	// reader, err := iconv.NewReader(source, "tis-620", "utf-8")
-	if err != nil {
-		return
-	}
-	defer cd.Close()
-	bufSize := 0 // default if zero
-	reader := iconv.NewReader(cd, source, bufSize)
+	cp874Decoder := charmap.Windows874.NewDecoder()
+	reader := cp874Decoder.Reader(source)
 	scanner := bufio.NewScanner(reader)
 	var line []rune
 	var headerLine CrossBankBillPaymentHeader

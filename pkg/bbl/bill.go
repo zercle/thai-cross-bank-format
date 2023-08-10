@@ -104,7 +104,6 @@ func (b BillPaymentReq) ToTransaction() (result datamodels.Transaction, err erro
 type BillPaymentResp struct {
 	ResponseCode  string  `json:"responseCode"`
 	ResponseMesg  string  `json:"responseMesg"`
-	RspAmount     float64 `json:"rspAmount"`
 	RspReference1 string  `json:"rspReference1"`
 	RspReference2 string  `json:"rspReference2"`
 	RspReference3 string  `json:"rspReference3"`
@@ -113,4 +112,5 @@ type BillPaymentResp struct {
 	UserData3     string  `json:"userData3"`
 	UserData4     string  `json:"userData4"`
 	UserData5     string  `json:"userData5"`
+	RspAmount     float64 `json:"rspAmount"`
 }

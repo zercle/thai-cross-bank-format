@@ -1,5 +1,5 @@
 module github.com/zercle/thai-cross-bank-format
 
-go 1.20
+go 1.18
 
-require github.com/qiniu/iconv v1.2.0
+require golang.org/x/text v0.12.0
