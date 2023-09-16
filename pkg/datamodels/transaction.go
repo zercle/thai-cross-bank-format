@@ -57,6 +57,6 @@ func (b Transaction) ToCrossBank(result both.CrossBankBillPaymentDetail) {
 	}
 
 	if len(b.PayeePID) >= 15 {
-		result.BillerId = b.PayeePID
+		result.BillerID = b.PayeePID
 	}
 }

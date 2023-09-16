@@ -48,12 +48,12 @@ const (
 
 // BBL: Bill Payment request from bank
 type BillPaymentReq struct {
-	PayeeId    string      `json:"payeeId"`
+	PayeeID    string      `json:"payeeId"`
 	TransDate  string      `json:"transDate"`
 	TransTime  string      `json:"transTime"`
 	TransRef   string      `json:"transRef"`
 	Channel    string      `json:"channel"`
-	TermId     string      `json:"termId"`
+	TermID     string      `json:"termId"`
 	Amount     json.Number `json:"amount"`
 	Reference1 string      `json:"reference1"`
 	Reference2 string      `json:"reference2"`
@@ -81,13 +81,13 @@ func (b BillPaymentReq) ToTransaction() (result datamodels.Transaction, err erro
 
 	result = datamodels.Transaction{
 		PayeeBankCode: bankofthailand.BankCode["BBL"], // BBL
-		PayeePID:      b.PayeeId,
+		PayeePID:      b.PayeeID,
 		PayerBankCode: b.FromBank,
 		Reference1:    b.Reference1,
 		Reference2:    b.Reference2,
 		Reference3:    b.Reference3,
 		Channel:       b.Channel,
-		Terminal:      b.TermId,
+		Terminal:      b.TermID,
 		Amount:        b.Amount,
 		TxRef:         b.TransRef,
 		TxDateTime:    transactionTime,

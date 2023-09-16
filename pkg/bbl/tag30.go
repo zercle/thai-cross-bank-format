@@ -35,7 +35,7 @@ var RetryFlag = map[string]string{
 }
 
 type Tag30Req struct {
-	BillerId     string      `json:"billerId"`
+	BillerID     string      `json:"billerId"`
 	TransDate    string      `json:"transDate"`
 	TransTime    string      `json:"transTime"`
 	TermType     string      `json:"termType"`
@@ -83,10 +83,10 @@ func (b Tag30Req) ToTransaction() (result datamodels.Transaction, err error) {
 		TxDateTime:    transactionTime,
 	}
 
-	billerId := []rune(b.BillerId)
+	billerID := []rune(b.BillerID)
 
-	if len(billerId) >= 13 {
-		result.PayeePID = string(billerId[:13])
+	if len(billerID) >= 13 {
+		result.PayeePID = string(billerID[:13])
 	}
 
 	if termType, ok := TermType[b.TermType]; ok {

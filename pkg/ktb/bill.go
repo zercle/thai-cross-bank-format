@@ -20,7 +20,7 @@ type BillPaymentReqBody struct {
 
 type BillPaymentReqCode struct {
 	XMLName  xml.Name `xml:"RequestCode"`
-	TranxId  string   `xml:"tranxid,omitempty"`
+	TranxID  string   `xml:"tranxid,omitempty"`
 	Ref1     string   `xml:"ref1"`
 	Datetime string   `xml:"datetime"`
 	Prodcode string   `xml:"prodcode"`
@@ -55,7 +55,7 @@ type BillPaymentRespBody struct {
 
 type BillPaymentRespCode struct {
 	XMLName  xml.Name `xml:"RequestCodeResponse"`
-	TranxId  string   `xml:"tranxid"`
+	TranxID  string   `xml:"tranxid"`
 	Bankref  string   `xml:"bankref"`
 	Respcode string   `xml:"respcode"`
 	Respmsg  string   `xml:"respmsg"`

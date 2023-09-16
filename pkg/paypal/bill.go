@@ -14,13 +14,13 @@ type OrderReq struct {
 }
 
 type OrderResp struct {
-	Id     string
+	ID     string
 	Status string
 	Links  []Link
 }
 
 type AuthorizedOrder struct {
-	Id            string
+	ID            string
 	Status        string
 	Payer         Payer
 	PerchaseUnits []PerchaseUnit
@@ -28,7 +28,7 @@ type AuthorizedOrder struct {
 }
 
 type CaptureResp struct {
-	Id            string
+	ID            string
 	Status        string
 	Payer         Payer
 	PerchaseUnits []PerchaseUnit
@@ -36,7 +36,7 @@ type CaptureResp struct {
 }
 
 type Webhook struct {
-	Id              string
+	ID              string
 	CreateTime      time.Time
 	ResourceType    string
 	EventVersion    string
@@ -48,24 +48,24 @@ type Webhook struct {
 }
 
 type WebhookReq struct {
-	Url        string
+	URL        string
 	EventTypes []EventType
 }
 
 type WebhookResp struct {
-	Id         string
-	Url        string
+	ID         string
+	URL        string
 	EventTypes []EventType
 	Links      []Link
 }
 
 type WebhookVerifyReq struct {
-	TransmissionId   string
+	TransmissionID   string
 	TransmissionTime time.Time
-	CertUrl          string
+	CertURL          string
 	AuthAlgo         string
 	TransmissionSig  string
-	WebhookId        string
+	WebhookID        string
 	WebhookEvent     WebhookEvent
 }
 

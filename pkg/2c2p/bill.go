@@ -45,7 +45,7 @@ type BillPaymentResp struct {
 	UserDefined4                  string      `json:"userDefined4"`
 	UserDefined5                  string      `json:"userDefined5"`
 	AcquirerReferenceNo           string      `json:"acquirerReferenceNo"`
-	AcquirerMerchantId            string      `json:"acquirerMerchantId"`
+	AcquirerMerchantID            string      `json:"acquirerMerchantId"`
 	IdempotencyID                 string      `json:"idempotencyID"`
 	PaymentScheme                 string      `json:"paymentScheme"`
 	IdempotencyNo                 string      `json:"idempotencyNo"`

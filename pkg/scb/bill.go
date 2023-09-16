@@ -55,7 +55,7 @@ type BillPaymentReq struct {
 	Request    string      `json:"request"`
 	User       string      `json:"user"`
 	Password   string      `json:"password"`
-	TranId     string      `json:"tranID"`
+	TranID     string      `json:"tranID"`
 	TranDate   string      `json:"tranDate"`
 	Channel    string      `json:"channel"`
 	Account    string      `json:"account"`
@@ -64,7 +64,7 @@ type BillPaymentReq struct {
 	Reference2 string      `json:"reference2"`
 	Reference3 string      `json:"reference3"`
 	BranchCode string      `json:"branchCode"`
-	TerminalId string      `json:"terminalID"`
+	TerminalID string      `json:"terminalID"`
 }
 
 func (b BillPaymentReq) ToTransaction() (result datamodels.Transaction, err error) {
@@ -90,9 +90,9 @@ func (b BillPaymentReq) ToTransaction() (result datamodels.Transaction, err erro
 		Reference2:    b.Reference2,
 		Reference3:    b.Reference3,
 		PayeeBranchNo: b.BranchCode,
-		Terminal:      b.TerminalId,
+		Terminal:      b.TerminalID,
 		Amount:        b.Amount,
-		TxRef:         b.TranId,
+		TxRef:         b.TranID,
 		TxDateTime:    transactionTime,
 	}
 
@@ -103,8 +103,8 @@ type BillPaymentResp struct {
 	Response   string  `json:"response"`
 	ResCode    string  `json:"resCode"`
 	ResMesg    string  `json:"resMesg"`
-	TranId     string  `json:"tranID"`
+	TranID     string  `json:"tranID"`
 	Reference2 string  `json:"reference2,omitempty"`
-	PaymentId  string  `json:"paymentID,omitempty"`
+	PaymentID  string  `json:"paymentID,omitempty"`
 	Amount     float64 `json:"amount,omitempty"`
 }

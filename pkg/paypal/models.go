@@ -8,7 +8,7 @@ import (
 type PerchaseUnit struct {
 	Shipping    Shipping
 	Amount      Amount
-	ReferenceId string
+	ReferenceID string
 	Payments    []Payment
 }
 
@@ -18,7 +18,7 @@ type Payment struct {
 }
 
 type Authorization struct {
-	Id               string
+	ID               string
 	Status           string
 	Amount           Amount
 	SellerProtection SellerProtection
@@ -34,7 +34,7 @@ type Capture struct {
 	UpdateTime                time.Time
 	SellerReceivableBreakdown SellerReceivableBreakdown
 	Amount                    Amount
-	Id                        string
+	ID                        string
 	Status                    string
 	DisbursementMode          string
 	SellerProtection          SellerProtection
@@ -61,7 +61,7 @@ type Link struct {
 type Payer struct {
 	Name         Name
 	EmailAddress string
-	PayerId      string
+	PayerID      string
 }
 
 type Name struct {
@@ -98,7 +98,7 @@ type EventType struct {
 }
 
 type WebhookEvent struct {
-	Id           string
+	ID           string
 	CreateTime   time.Time
 	ResourceType string
 	EventType    string
@@ -107,7 +107,7 @@ type WebhookEvent struct {
 }
 
 type Resource struct {
-	Id            string
+	ID            string
 	CreateTime    time.Time
 	UpdateTime    time.Time
 	State         string

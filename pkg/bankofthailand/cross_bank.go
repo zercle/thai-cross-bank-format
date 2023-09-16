@@ -57,7 +57,7 @@ type CrossBankBillPaymentDetail struct {
 	Amount            json.Number `json:"amount"`
 	ChequeBankCode    string      `json:"chequeBankCode"`
 	Spare1            string      `json:"spare1"`
-	BillerId          string      `json:"billerId"`
+	BillerID          string      `json:"billerId"`
 	Spare2            string      `json:"spare2"`
 	SendingBankCode   string      `json:"sendingBankCode"`
 	NewChequeNo       string      `json:"newChequeNo"`
@@ -140,7 +140,7 @@ scanLoop:
 			// fmt.Printf("amount: %s\n", string(line[163:176]))
 			// fmt.Printf("cheque bank code: %s\n", string(line[176:179]))
 			// fmt.Printf("etc1: %s\n", string(line[179:196]))
-			// fmt.Printf("biller id: %s\n", string(line[196:211]))
+			// fmt.Printf("biller ID: %s\n", string(line[196:211]))
 			// fmt.Printf("etc2: %s\n", string(line[211:243]))
 			// fmt.Printf("payer bank code: %s\n", string(line[243:246]))
 			// fmt.Printf("new cheque no: %s\n", string(line[246:256]))
@@ -164,7 +164,7 @@ scanLoop:
 			amount = fmt.Sprintf("%04s", amount)
 			cbc := string(line[176:179])
 			spare1 := string(line[179:196])
-			billerId := string(line[196:211])
+			billerID := string(line[196:211])
 			spare2 := string(line[211:243])
 			payerBankCode := string(line[243:246])
 			ncn := string(line[246:256])
@@ -188,7 +188,7 @@ scanLoop:
 				Amount:            json.Number(amount),
 				ChequeBankCode:    strings.TrimSpace(cbc),
 				Spare1:            strings.TrimSpace(spare1),
-				BillerId:          strings.TrimSpace(billerId),
+				BillerID:          strings.TrimSpace(billerID),
 				Spare2:            strings.TrimSpace(spare2),
 				SendingBankCode:   strings.TrimSpace(payerBankCode),
 				NewChequeNo:       strings.TrimSpace(ncn),

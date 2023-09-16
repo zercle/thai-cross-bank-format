@@ -47,18 +47,18 @@ type Tag30Req struct {
 	EventCode              string      `json:"eventCode"`
 	TransactionType        string      `json:"transactionType"`
 	ReverseFlag            string      `json:"reverseFlag"`
-	PayeeProxyId           string      `json:"payeeProxyId"`
+	PayeeProxyID           string      `json:"payeeProxyId"`
 	PayeeProxyType         string      `json:"payeeProxyType"`
 	PayeeAccountNumber     string      `json:"payeeAccountNumber"`
 	PayeeName              string      `json:"payeeName"`
-	PayerProxyId           string      `json:"payerProxyId"`
+	PayerProxyID           string      `json:"payerProxyId"`
 	PayerProxyType         string      `json:"payerProxyType"`
 	PayerAccountNumber     string      `json:"payerAccountNumber"`
 	PayerName              string      `json:"payerName"`
 	SendingBankCode        string      `json:"sendingBankCode"`
 	ReceivingBankCode      string      `json:"receivingBankCode"`
 	Amount                 json.Number `json:"amount"`
-	TransactionId          string      `json:"transactionId"`
+	TransactionID          string      `json:"transactionId"`
 	FastEasySlipNumber     string      `json:"fastEasySlipNumber"`
 	TransactionDateAndTime string      `json:"transactionDateandTime"`
 	BillPaymentRef1        string      `json:"billPaymentRef1"`
@@ -69,7 +69,7 @@ type Tag30Req struct {
 	EquivalentCurrencyCode string      `json:"equivalentCurrencyCode"`
 	ExchangeRate           string      `json:"exchangeRate"`
 	ChannelCode            string      `json:"channelCode"`
-	PartnerTransactionId   string      `json:"partnerTransactionId"`
+	PartnerTransactionID   string      `json:"partnerTransactionId"`
 	TepaCode               string      `json:"tepaCode"`
 }
 
@@ -92,18 +92,18 @@ func (b Tag30Req) ToTransaction() (result datamodels.Transaction, err error) {
 		PayeeBankCode: bankofthailand.BankCode["SCB"], // SCB
 		PayeeAcc:      b.PayeeAccountNumber,
 		PayeeName:     b.PayeeName,
-		PayeePID:      b.PayeeProxyId,
+		PayeePID:      b.PayeeProxyID,
 		PayerBankCode: b.SendingBankCode,
 		PayerAcc:      b.PayerAccountNumber,
 		PayerName:     b.PayerName,
-		PayerPID:      b.PayerProxyId,
+		PayerPID:      b.PayerProxyID,
 		Reference1:    b.BillPaymentRef1,
 		Reference2:    b.BillPaymentRef2,
 		Reference3:    b.BillPaymentRef3,
 		Amount:        b.Amount,
 		CurrencyCode:  b.CurrencyCode,
 		Channel:       b.ChannelCode,
-		TxRef:         b.TransactionId,
+		TxRef:         b.TransactionID,
 		TxDateTime:    transactionTime,
 	}
 
@@ -114,6 +114,6 @@ func (b Tag30Req) ToTransaction() (result datamodels.Transaction, err error) {
 type Tag30Resp struct {
 	ResCode       string `json:"resCode"`
 	ResDesc       string `json:"resDesc"`
-	TransactionId string `json:"transactionId"`
-	ConfirmId     string `json:"confirmId"`
+	TransactionID string `json:"transactionId"`
+	ConfirmID     string `json:"confirmId"`
 }
